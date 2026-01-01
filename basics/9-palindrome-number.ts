@@ -1,4 +1,7 @@
 /*
+https://leetcode.com/problems/palindrome-number/
+Problem:  Palindrome Number
+
 Approach 1: Reverse the entire number and compare
 
 Idea:
