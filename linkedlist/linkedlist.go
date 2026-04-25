@@ -108,3 +108,7 @@ func (ll *LinkedList) Print() string {
 
 	return res
 }
+
+func (ll *LinkedList) GetHead() *ListNode {
+	return ll.head
+}
