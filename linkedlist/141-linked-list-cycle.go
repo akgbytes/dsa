@@ -18,12 +18,14 @@ Space Complexity: O(n)
 func HasCycleNaive(head *ListNode) bool {
 	set := make(map[*ListNode]struct{})
 
-	for head != nil {
-		if _, exists := set[head]; exists {
+	current := head
+
+	for current != nil {
+		if _, exists := set[current]; exists {
 			return true
 		}
-		set[head] = struct{}{}
-		head = head.Next
+		set[current] = struct{}{}
+		current = current.Next
 	}
 
 	return false

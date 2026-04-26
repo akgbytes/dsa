@@ -16,10 +16,11 @@ Space Complexity: O(n)
 
 func ReverseListNaive(head *ListNode) *ListNode {
 	// convert to array
+	current := head
 	arr := make([]int, 0)
-	for head != nil {
-		arr = append(arr, head.Val)
-		head = head.Next
+	for current != nil {
+		arr = append(arr, current.Val)
+		current = current.Next
 	}
 
 	var ll *ListNode

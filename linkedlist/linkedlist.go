@@ -1,6 +1,7 @@
 package linkedlist
 
 import (
+	"fmt"
 	"strconv"
 )
 
@@ -91,12 +92,12 @@ func (ll *LinkedList) DeleteAtIndex(index int) {
 	ll.len--
 }
 
-func (ll *LinkedList) Print() string {
+func (ll *LinkedList) Print() {
 	res := ""
 	current := ll.head
 
 	if current == nil {
-		return res + "empty"
+		fmt.Println(res + "empty")
 	}
 
 	res += strconv.Itoa(current.Val)
@@ -106,9 +107,27 @@ func (ll *LinkedList) Print() string {
 		res = res + " -> " + strconv.Itoa(current.Val)
 	}
 
-	return res
+	fmt.Println(res)
 }
 
 func (ll *LinkedList) GetHead() *ListNode {
 	return ll.head
+}
+
+func PrintList(list *ListNode) {
+	res := ""
+	current := list
+
+	if current == nil {
+		fmt.Println(res + "empty")
+	}
+
+	res += strconv.Itoa(current.Val)
+
+	for current.Next != nil {
+		current = current.Next
+		res = res + " -> " + strconv.Itoa(current.Val)
+	}
+
+	fmt.Println(res)
 }
