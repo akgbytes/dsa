@@ -1,24 +1,14 @@
 package main
 
-import (
-	"fmt"
+import "fmt"
 
-	"github.com/akgbytes/dsa/linkedlist"
-)
+type ListNode struct {
+	Val  int
+	Next *ListNode
+}
 
 func main() {
-
-	ll := linkedlist.LinkedList{}
-
-	ll.AddAtHead(1)
-	ll.AddAtHead(2)
-	ll.AddAtHead(3)
-	ll.AddAtHead(3)
-	ll.AddAtHead(2)
-	ll.AddAtHead(1)
-
-	ll.Print()
-
-	fmt.Println(linkedlist.IsPalindrome(ll.GetHead()))
-
+	for _ = range 1 {
+		fmt.Println("sdfgg")
+	}
 }
