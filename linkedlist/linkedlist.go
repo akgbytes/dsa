@@ -2,7 +2,6 @@ package linkedlist
 
 import (
 	"fmt"
-	"strconv"
 )
 
 type ListNode struct {
@@ -15,119 +14,105 @@ type LinkedList struct {
 	len  int
 }
 
-func (ll *LinkedList) Get(index int) int {
-	if index < 0 || index >= ll.len {
-		return -1
-	}
-
-	current := ll.head
-	for _ = range index {
-		current = current.Next
-	}
-
-	return current.Val
-}
-
-func (ll *LinkedList) AddAtHead(val int) {
-	n := &ListNode{Val: val}
-	n.Next = ll.head
-	ll.head = n
-	ll.len++
-}
-
-func (ll *LinkedList) AddAtTail(val int) {
-	n := &ListNode{Val: val}
-
+func (ll *LinkedList) Insert(val int) {
+	ListNode := &ListNode{Val: val}
 	if ll.head == nil {
-		ll.head = n
+		ll.head = ListNode
 		ll.len++
 		return
 	}
 
-	current := ll.head
-	for current.Next != nil {
-		current = current.Next
+	curr := ll.head
+
+	for curr.Next != nil {
+		curr = curr.Next
 	}
 
-	current.Next = n
+	curr.Next = ListNode
 	ll.len++
 }
 
-func (ll *LinkedList) AddAtIndex(index int, val int) {
-	if index < 0 || index > ll.len {
+func (ll *LinkedList) InsertAt(val int, idx int) {
+	if ll.len < idx || idx < 0 {
 		return
 	}
 
-	if index == 0 {
-		ll.AddAtHead(val)
+	ListNode := &ListNode{Val: val}
+
+	if idx == 0 {
+		ListNode.Next = ll.head
+		ll.head = ListNode
+		ll.len++
 		return
 	}
 
-	current := ll.head
-	for _ = range index - 1 {
-		current = current.Next
+	curr := ll.head
+
+	for _ = range idx - 1 {
+		curr = curr.Next
 	}
 
-	n := &ListNode{Val: val}
-	n.Next = current.Next
-	current.Next = n
+	ListNode.Next = curr.Next
+	curr.Next = ListNode
 	ll.len++
+
 }
 
-func (ll *LinkedList) DeleteAtIndex(index int) {
-	if index < 0 || index >= ll.len {
+func (ll *LinkedList) Delete(val int) {
+	if ll.head == nil {
 		return
 	}
 
-	sentinel := &ListNode{Next: ll.head}
-	current := sentinel
+	sentinel := &ListNode{}
+	sentinel.Next = ll.head
 
-	for _ = range index {
-		current = current.Next
+	curr := sentinel
+	for curr.Next != nil {
+		if curr.Next.Val == val {
+			curr.Next = curr.Next.Next
+			ll.head = sentinel.Next
+			ll.len--
+			return
+		}
+		curr = curr.Next
+	}
+}
+
+func (ll *LinkedList) DeleteAt(idx int) {
+	if idx >= ll.len || idx < 0 {
+		return
 	}
 
-	current.Next = current.Next.Next
+	if idx == 0 {
+		ll.head = ll.head.Next
+		ll.len--
+		return
+	}
 
-	ll.head = sentinel.Next
+	curr := ll.head
+
+	for _ = range idx - 1 {
+		curr = curr.Next
+	}
+
+	curr.Next = curr.Next.Next
 	ll.len--
 }
 
+func (ll *LinkedList) Find(val int) int {
+	idx := 0
+	for curr := ll.head; curr != nil; curr = curr.Next {
+		if curr.Val == val {
+			return idx
+		}
+		idx++
+	}
+	return -1
+}
+
 func (ll *LinkedList) Print() {
-	res := ""
-	current := ll.head
-
-	if current == nil {
-		fmt.Println(res + "empty")
+	for curr := ll.head; curr != nil; curr = curr.Next {
+		fmt.Printf("%d -> ", curr.Val)
 	}
-
-	res += strconv.Itoa(current.Val)
-
-	for current.Next != nil {
-		current = current.Next
-		res = res + " -> " + strconv.Itoa(current.Val)
-	}
-
-	fmt.Println(res)
-}
-
-func (ll *LinkedList) GetHead() *ListNode {
-	return ll.head
-}
-
-func PrintList(list *ListNode) {
-	res := ""
-	current := list
-
-	if current == nil {
-		fmt.Println(res + "empty")
-	}
-
-	res += strconv.Itoa(current.Val)
-
-	for current.Next != nil {
-		current = current.Next
-		res = res + " -> " + strconv.Itoa(current.Val)
-	}
-
-	fmt.Println(res)
+	fmt.Print("nil\n")
 }

@@ -1,8 +1,11 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/akgbytes/dsa/strings"
+)
 
 func main() {
-	var age = 85
-	fmt.Println(age)
+	fmt.Println(strings.RotateString("abcde", "cdeap"))
 }
