@@ -7,5 +7,7 @@ import (
 )
 
 func main() {
-	fmt.Println(strings.RotateString("abcde", "cdeap"))
+
+	words := []string{"leet", "code"}
+	fmt.Println(strings.FindWordsContaining(words, 'o'))
 }
