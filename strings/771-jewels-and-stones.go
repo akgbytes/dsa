@@ -6,10 +6,10 @@ https://leetcode.com/problems/jewels-and-stones
 Problem: Jewels and Stones
 
 ----------------------------------------
-Approach (HashMap Lookup):
-- Store all jewel characters in a hashmap
+Approach (Set Lookup):
+- Store all jewel characters in a set
 - Traverse stones string
-- If stone exists in hashmap, increment count
+- If stone exists in set, increment count
 
 Time Complexity: O(n + m)
 Space Complexity: O(n)
@@ -18,16 +18,16 @@ Space Complexity: O(n)
 func NumJewelsInStones(jewels string, stones string) int {
 	count := 0
 
-	hashmap := make(map[rune]bool)
+	set := make(map[rune]struct{})
 
 	// store jewels
 	for _, ch := range jewels {
-		hashmap[ch] = true
+		set[ch] = struct{}{}
 	}
 
 	// count matching stones
 	for _, ch := range stones {
-		if hashmap[ch] {
+		if _, ok := set[ch]; ok {
 			count++
 		}
 	}
